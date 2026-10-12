@@ -8,16 +8,13 @@ find_package(Qt6 6.8 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
+set(QT_QML_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qml")
+
 qt_add_executable(appScrambly
     main.cpp
 )
 
-qt_add_qml_module(appScrambly
-    URI Scrambly
-    VERSION 1.0
-    QML_FILES
-        Main.qml
-)
+add_subdirectory(qml)
 
 set_target_properties(appScrambly PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
@@ -27,7 +24,9 @@ set_target_properties(appScrambly PROPERTIES
 )
 
 target_link_libraries(appScrambly
-    PRIVATE Qt6::Quick
+    PRIVATE
+        Scramblyplugin
+        Qt6::Quick
 )
 
 include(GNUInstallDirs)
