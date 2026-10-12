@@ -7,7 +7,7 @@ qt_add_qml_module(design_system
     QML_FILES
         ExamplePrimitiveTokens.qml
         ExampleSemanticTokens.qml
-        components/ExmapleComponent.qml
+        components/ExampleComponent.qml
 )
 
 target_link_libraries(design_system

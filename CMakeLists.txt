@@ -24,7 +24,9 @@ set_target_properties(appScrambly PROPERTIES
 )
 
 target_link_libraries(appScrambly
-    PRIVATE Qt6::Quick
+    PRIVATE
+        Scramblyplugin
+        Qt6::Quick
 )
 
 include(GNUInstallDirs)
