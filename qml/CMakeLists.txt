@@ -13,6 +13,7 @@ qt_add_qml_module(Scrambly
 
 target_link_libraries(Scrambly
     PRIVATE
+        core
         design_system
         Qt6::Quick
 )

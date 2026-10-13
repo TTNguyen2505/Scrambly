@@ -10,11 +10,12 @@ qt_standard_project_setup(REQUIRES 6.8)
 
 set(QT_QML_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qml")
 
-qt_add_executable(appScrambly
-    main.cpp
-)
-
+add_subdirectory(src)
 add_subdirectory(qml)
+
+qt_add_executable(appScrambly
+    src/main.cpp
+)
 
 set_target_properties(appScrambly PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
@@ -26,6 +27,7 @@ set_target_properties(appScrambly PROPERTIES
 target_link_libraries(appScrambly
     PRIVATE
         Scramblyplugin
+        coreplugin
         Qt6::Quick
 )
 
