@@ -17,6 +17,20 @@ qt_add_executable(appScrambly
     src/main.cpp
 )
 
+qt_add_resources(appScrambly "assets"
+    PREFIX "/"
+    FILES
+        assets/audio/hover_effect.mp3
+        assets/fonts/liberation_mono_bold.ttf
+        assets/fonts/liberation_mono_regular.ttf
+        assets/fonts/liberation_sans_bold.ttf
+        assets/fonts/liberation_sans_regular.ttf
+        assets/fonts/liberation_serif_bold.ttf
+        assets/fonts/liberation_serif_regular.ttf
+        assets/fonts/vt_323.ttf
+        assets/images/magnifying_glass.svg
+)
+
 set_target_properties(appScrambly PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
