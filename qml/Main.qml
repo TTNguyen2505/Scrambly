@@ -5,7 +5,7 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Qt Project")
+    title: Strings.appName
 
     Rectangle {
         anchors.fill: parent
@@ -13,7 +13,7 @@ ApplicationWindow {
 
         Text {
             anchors.centerIn: parent
-            text: "Hello from Qt!"
+            text: Strings.welcomeTitle
             color: "white"
             font.pixelSize: 22
         }
