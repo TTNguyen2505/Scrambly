@@ -1,0 +1,38 @@
+%%!
+% @file appendix_b_survey_data.tex
+% @brief Template for Appendix B (Survey and Experimental Data).
+
+\chapter{Tiêu đề phụ lục B}
+\label{app:appendix_b}
+
+Phụ lục này lưu trữ chi tiết bảng số liệu kiểm thử thực nghiệm và dữ liệu khảo sát mẫu phục vụ nghiên cứu.
+
+\section{Tiêu đề mục B.1}
+\label{sec:section_b_1}
+
+Nội dung chi tiết của mục B.1 trình bày bảng số liệu khảo sát thống kê. Bảng \ref{tab:appendix_sample_table} minh họa cấu trúc bảng dữ liệu phụ lục.
+
+\begin{table}[h!]
+    \caption{Tiêu đề bảng B.1}
+    \label{tab:appendix_sample_table}
+    \centering
+    \begin{tabularx}{\textwidth}{|C{1.5cm}|Y|C{2.5cm}|C{2.5cm}|C{2.5cm}|}
+        \hline
+        \thcell{STT} & \thcell{Tham số khảo sát mẫu}    & \thcell{Giá trị 01} & \thcell{Giá trị 02} & \thcell{Giá trị 03} \\ \hline
+        1            & Tham số dữ liệu kiểm thử A      & 10.5                & 25.0                & 40.2                \\ \hline
+        2            & Tham số dữ liệu kiểm thử B      & 18.2                & 34.5                & 55.8                \\ \hline
+        3            & Tham số dữ liệu kiểm thử C      & 45.0                & 82.1                & 99.4                \\ \hline
+    \end{tabularx}
+\end{table}
+
+Bên cạnh bảng dữ liệu, Hình \ref{fig:appendix_sample_figure} minh họa cấu trúc biểu đồ đồ thị dữ liệu mẫu đính kèm trong phụ lục.
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+        \draw[thick, fill=gray!10] (0,0) rectangle (10, 2.8);
+        \node at (5, 1.4) [align=center] {\textbf{BIỂU ĐỒ MINH HỌA DỮ LIỆU PHỤ LỤC}\\(TikZ Vector Diagram)};
+    \end{tikzpicture}
+    \caption{Tiêu đề hình B.1}
+    \label{fig:appendix_sample_figure}
+\end{figure}

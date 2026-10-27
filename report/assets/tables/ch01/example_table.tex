@@ -1,0 +1,15 @@
+%%!
+% @brief Example table demonstrating the use of tabularx and custom column types in LaTeX.
+
+\begin{table}[h!]
+    \caption{Tiêu đề bảng 1.1}
+    \label{tab:sample_table}
+    \centering
+    \begin{tabularx}{\textwidth}{|C{1.5cm}|Y|C{3.0cm}|C{3.0cm}|}
+        \hline
+        \thcell{STT} & \thcell{Tiêu chí đánh giá mẫu} & \thcell{Thông số A} & \thcell{Thông số B} \\ \hline
+        1            & Dữ liệu thử nghiệm mẫu số 01   & 100                 & 200                 \\ \hline
+        2            & Dữ liệu thử nghiệm mẫu số 02   & 300                 & 400                 \\ \hline
+        3            & Dữ liệu thử nghiệm mẫu số 03   & 500                 & 600                 \\ \hline
+    \end{tabularx}
+\end{table}

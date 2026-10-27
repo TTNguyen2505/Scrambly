@@ -1,0 +1,416 @@
+%%!
+% @file format.sty
+% @brief Document typography, heading styles, list formats, and table layouts.
+\ProvidesPackage{config/format}
+
+\newcommand{\university}[1]{\def\theuniversity{#1}\def\@university{#1}}
+\newcommand{\faculty}[1]{\def\thefaculty{#1}\def\@faculty{#1}}
+\newcommand{\institutionlogo}[1]{\def\theinstitutionlogo{#1}\def\@institutionlogo{#1}}
+\newcommand{\subject}[1]{\def\thesubject{#1}\def\@subject{#1}}
+\newcommand{\reporttitle}[1]{\def\thereporttitle{#1}\def\@reporttitle{#1}}
+\newcommand{\subtitle}[1]{\def\thesubtitle{#1}\def\@subtitle{#1}}
+\newcommand{\supervisor}[1]{\def\thesupervisor{#1}\def\@supervisor{#1}}
+\newcommand{\submissiondate}[1]{\def\thesubmissiondate{#1}\def\@submissiondate{#1}}
+\newcommand{\studentclass}[1]{\def\thestudentclass{#1}\def\@studentclass{#1}}
+\newcommand{\cohort}[1]{\def\thecohort{#1}\def\@cohort{#1}}
+
+\def\theuniversity{}
+\def\thefaculty{}
+\def\theinstitutionlogo{assets/logos/university_logo.pdf}
+\def\thesubject{}
+\def\thereporttitle{}
+\def\thesubtitle{}
+\def\thesupervisor{}
+\def\thesubmissiondate{}
+\def\thestudentclass{}
+\def\thecohort{}
+\def\@university{}
+\def\@faculty{}
+\def\@institutionlogo{assets/logos/university_logo.pdf}
+\def\@subject{}
+\def\@reporttitle{}
+\def\@subtitle{}
+\def\@supervisor{}
+\def\@submissiondate{}
+\def\@studentclass{}
+\def\@cohort{}
+
+\providecommand{\n}{\\}
+
+\newcounter{authorcount}
+\setcounter{authorcount}{0}
+\newcounter{authorloopidx}
+
+%%!
+% @brief Registers an author by index, full name, student ID, assigned task, and contribution percentage.
+% @param #1 Author index / ID (e.g., 1, 2, 3...).
+% @param #2 Full name of the student.
+% @param #3 Student ID number (MSSV).
+% @param #4 Assigned task / responsibilities.
+% @param #5 Contribution percentage.
+\newcommand{\addauthor}[5]{%
+    \ifnum#1>\value{authorcount}%
+        \setcounter{authorcount}{#1}%
+    \fi
+    \expandafter\gdef\csname authorname#1\endcsname{#2}%
+    \expandafter\gdef\csname authorid#1\endcsname{#3}%
+    \expandafter\gdef\csname authortask#1\endcsname{#4}%
+    \expandafter\gdef\csname authorcontrib#1\endcsname{#5}%
+}
+
+%%!
+% @brief Getters for author information by author index / ID.
+% @param #1 Author index / ID.
+\newcommand{\getauthorname}[1]{%
+    \ifcsname authorname#1\endcsname
+        \csname authorname#1\endcsname
+    \fi
+}
+
+\newcommand{\getauthorid}[1]{%
+    \ifcsname authorid#1\endcsname
+        \csname authorid#1\endcsname
+    \fi
+}
+
+\newcommand{\getauthortask}[1]{%
+    \ifcsname authortask#1\endcsname
+        \csname authortask#1\endcsname
+    \fi
+}
+
+\newcommand{\getauthorcontrib}[1]{%
+    \ifcsname authorcontrib#1\endcsname
+        \csname authorcontrib#1\endcsname
+    \fi
+}
+
+\newlength{\authorlabelwidth}
+\setlength{\authorlabelwidth}{5.4cm}
+
+%%!
+% @brief Recursively renders the list of authors in two-column alignment.
+\newcommand{\@printauthors}{%
+    \ifnum\value{authorloopidx}<\value{authorcount}%
+        \stepcounter{authorloopidx}%
+        \ifnum\value{authorloopidx}=1
+            \noindent\makebox[\authorlabelwidth][l]{Sinh viên thực hiện:}%
+            \parbox[t]{\dimexpr\textwidth-\authorlabelwidth\relax}{%
+                \csname authorid\the\value{authorloopidx}\endcsname\space\textendash\space\csname authorname\the\value{authorloopidx}\endcsname
+            }\par
+        \else
+            \noindent\makebox[\authorlabelwidth][l]{}%
+            \parbox[t]{\dimexpr\textwidth-\authorlabelwidth\relax}{%
+                \csname authorid\the\value{authorloopidx}\endcsname\space\textendash\space\csname authorname\the\value{authorloopidx}\endcsname
+            }\par
+        \fi
+        \expandafter\@printauthors
+    \fi
+}
+
+%%!
+% @brief Renders the supervisor, author list, class, and cohort block on the cover page.
+\newcommand{\renderauthorblock}{%
+    \begingroup
+    \fontsize{14pt}{20pt}\selectfont
+    \ifx\thesupervisor\empty\relax\else
+        \noindent\makebox[\authorlabelwidth][l]{Giảng viên hướng dẫn:}%
+        \parbox[t]{\dimexpr\textwidth-\authorlabelwidth\relax}{\thesupervisor}\par
+    \fi
+    \setcounter{authorloopidx}{0}%
+    \@printauthors
+    \ifx\thestudentclass\empty\relax\else
+        \noindent\makebox[\authorlabelwidth][l]{Lớp:}%
+        \parbox[t]{\dimexpr\textwidth-\authorlabelwidth\relax}{\thestudentclass}\par
+    \fi
+    \ifx\thecohort\empty\relax\else
+        \noindent\makebox[\authorlabelwidth][l]{Khoá:}%
+        \parbox[t]{\dimexpr\textwidth-\authorlabelwidth\relax}{\thecohort}\par
+    \fi
+    \endgroup
+}
+
+\raggedbottom
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{{\fontsize{13pt}{15.6pt}\selectfont\thepage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfoot[C]{{\fontsize{13pt}{15.6pt}\selectfont\thepage}}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{2}
+
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+\titleformat{\chapter}[block]
+    {\fontsize{13pt}{16pt}\selectfont\bfseries\centering}
+    {CHƯƠNG \thechapter.\enspace}
+    {0pt}
+    {\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{12pt}{4pt}
+
+\titleformat{\section}[block]
+    {\fontsize{13pt}{16pt}\selectfont}
+    {\thesection.\enspace}
+    {0pt}
+    {}
+\titlespacing*{\section}{0pt}{16pt}{4pt}
+
+\titleformat{\subsection}[block]
+    {\fontsize{13pt}{16pt}\selectfont}
+    {\thesubsection.\enspace}
+    {0pt}
+    {}
+\titlespacing*{\subsection}{0pt}{8pt}{4pt}
+
+\titleformat{\subsubsection}[block]
+    {\fontsize{13pt}{16pt}\selectfont}
+    {\thesubsubsection.\enspace}
+    {0pt}
+    {}
+\titlespacing*{\subsubsection}{0pt}{4pt}{2pt}
+
+\titleformat{name=\chapter,numberless}[block]
+    {\fontsize{14pt}{17pt}\selectfont\bfseries\centering}
+    {}
+    {0pt}
+    {\MakeUppercase}
+\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{4pt}
+
+\titlecontents{chapter}
+    [0pt]
+    {\vspace{2pt}\fontsize{13pt}{16pt}\selectfont\bfseries}
+    {Chương \thecontentslabel.\enspace\MakeUppercase}
+    {\MakeUppercase}
+    {\titlerule*[0.5pc]{.}\contentspage}
+    [\vspace{2pt}]
+
+\titlecontents{section}
+    [0.75cm]
+    {\fontsize{13pt}{16pt}\selectfont}
+    {\thecontentslabel.\enspace}
+    {}
+    {\titlerule*[0.5pc]{.}\contentspage}
+
+\titlecontents{subsection}
+    [1.5cm]
+    {\fontsize{13pt}{16pt}\selectfont}
+    {\thecontentslabel.\enspace}
+    {}
+    {\titlerule*[0.5pc]{.}\contentspage}
+
+%%!
+% @brief Disables inter-chapter vertical gaps in LOF, LOT, and LOL to achieve a unified compact layout.
+\newcommand{\chaptertolists}{}
+
+\let\orig@listoffigures\listoffigures
+\renewcommand{\listoffigures}{%
+    \begingroup
+    \let\addvspace\@gobble
+    \orig@listoffigures
+    \endgroup
+}
+
+\let\orig@listoftables\listoftables
+\renewcommand{\listoftables}{%
+    \begingroup
+    \let\addvspace\@gobble
+    \orig@listoftables
+    \endgroup
+}
+
+\let\orig@lstlistoflistings\lstlistoflistings
+\renewcommand{\lstlistoflistings}{%
+    \begingroup
+    \let\addvspace\@gobble
+    \orig@lstlistoflistings
+    \endgroup
+}
+
+\def\l@lstlisting{\ttl@lselect{lstlisting}}
+\def\ttll@lstlisting{1}
+
+\titlecontents{figure}
+    [0pt]
+    {\fontsize{13pt}{16pt}\selectfont}
+    {\makebox[2.5em][l]{\thecontentslabel}}
+    {}
+    {\titlerule*[0.5pc]{.}\contentspage}
+
+\titlecontents{table}
+    [0pt]
+    {\fontsize{13pt}{16pt}\selectfont}
+    {\makebox[2.5em][l]{\thecontentslabel}}
+    {}
+    {\titlerule*[0.5pc]{.}\contentspage}
+
+\titlecontents{lstlisting}
+    [0pt]
+    {\fontsize{13pt}{16pt}\selectfont}
+    {\makebox[2.5em][l]{\thecontentslabel}}
+    {}
+    {\titlerule*[0.5pc]{.}\contentspage}
+
+\setlist[itemize,1]{
+    label=--,
+    leftmargin=1.9cm,
+    labelsep=0.65cm,
+    topsep=8pt,
+    partopsep=0pt,
+    parsep=0pt,
+    itemsep=0pt,
+    font=\fontsize{13pt}{16pt}\selectfont
+}
+
+\setlist[itemize,2]{
+    label=+,
+    leftmargin=0.65cm,
+    labelsep=0.4cm,
+    topsep=8pt,
+    partopsep=0pt,
+    parsep=0pt,
+    itemsep=0pt,
+    font=\fontsize{13pt}{16pt}\selectfont
+}
+
+\definecolor{captiongray}{RGB}{64,64,64}
+
+\DeclareCaptionFormat{specformat}{%
+    \centering\fontsize{11pt}{14pt}\selectfont\color{captiongray}#1: #3\par
+}
+
+\captionsetup[table]{
+    format=specformat,
+    name=Bảng,
+    position=top,
+    aboveskip=12pt,
+    belowskip=6pt
+}
+
+\captionsetup[figure]{
+    format=specformat,
+    name=Hình,
+    position=bottom,
+    aboveskip=2pt,
+    belowskip=12pt
+}
+
+\renewcommand{\thetable}{\thechapter.\arabic{table}}
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+\setlength{\intextsep}{12pt}
+
+%%!
+% @brief Configures 4pt symmetric cell padding and vertical centering for tables.
+% @details Overrides array strut mechanics to enforce top and bottom cell padding
+%          across single-line and multi-line paragraph cells.
+\renewcommand\tabularxcolumn[1]{m{#1}}
+
+\newlength{\celltoppadding}
+\newlength{\cellbottompadding}
+\setlength{\celltoppadding}{4pt}
+\setlength{\cellbottompadding}{4pt}
+
+\setlength{\extrarowheight}{\celltoppadding}
+
+\def\@arstrut{%
+    \vrule \@height\dimexpr\ht\strutbox+\celltoppadding\relax
+           \@depth\dimexpr\dp\strutbox+\cellbottompadding\relax
+           \@width\z@
+}
+
+\def\@finalstrut#1{%
+    \unskip
+    \ifhmode \nobreak
+    \else
+        \ifnum\lastnodetype>\m@ne
+            \vskip-\baselineskip
+        \fi
+    \fi
+    \vrule\@width\z@\@height\z@\@depth\dimexpr\dp\strutbox+\cellbottompadding\relax
+}
+
+\setlength{\tabcolsep}{5pt}
+
+\newcolumntype{L}[1]{>{\fontsize{13pt}{16pt}\selectfont\raggedright\arraybackslash}m{#1}}
+\newcolumntype{C}[1]{>{\fontsize{13pt}{16pt}\selectfont\centering\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\fontsize{13pt}{16pt}\selectfont\raggedleft\arraybackslash}m{#1}}
+\newcolumntype{Y}{>{\fontsize{13pt}{16pt}\selectfont\raggedright\arraybackslash}X}
+
+%%!
+% @brief Formats a table header cell with bold, centered text.
+% @param #1 Cell text content.
+\newcommand{\thcell}[1]{{\fontsize{13pt}{16pt}\selectfont\bfseries\centering\arraybackslash #1\par}}
+
+\providecommand{\n}{\\}
+
+%%!
+% @brief Code listing appearance and Vietnamese caption names.
+\renewcommand{\lstlistingname}{Đoạn mã}
+\renewcommand{\lstlistlistingname}{DANH MỤC ĐOẠN MÃ}
+
+\lstset{
+    frame=single,
+    rulecolor=\color{black},
+    basicstyle=\fontsize{10pt}{12pt}\ttfamily,
+    lineskip=0pt,
+    breaklines=true,
+    breakatwhitespace=false,
+    captionpos=b,
+    showstringspaces=false,
+    tabsize=2,
+    aboveskip=8pt,
+    belowskip=8pt
+}
+
+%%!
+% @brief Renders the unnumbered appendix section divider without forcing a page break before the first sub-appendix.
+% @param #1 Section title (e.g., "PHỤ LỤC").
+\newcommand{\appendixmaintitle}[1]{%
+    \clearpage
+    \vspace*{12pt}%
+    {\centering\fontsize{14pt}{17pt}\selectfont\bfseries\MakeUppercase{#1}\par}%
+    \vspace{4pt}%
+    \addcontentsline{toc}{chapter}{#1}%
+    \let\orig@clearpage\clearpage
+    \let\orig@cleardoublepage\cleardoublepage
+    \def\clearpage{\let\clearpage\orig@clearpage\let\cleardoublepage\orig@cleardoublepage}%
+    \def\cleardoublepage{\let\clearpage\orig@clearpage\let\cleardoublepage\orig@cleardoublepage}%
+}
+
+%%!
+% @brief Redefines the appendix environment to format sub-appendix titles and TOC entries.
+\let\orig@appendix\appendix
+\renewcommand{\appendix}{%
+    \orig@appendix
+    \titleformat{\chapter}[block]
+    {\fontsize{13pt}{16pt}\selectfont\bfseries}
+    {Phụ lục \thechapter.\enspace}
+    {0pt}
+    {}
+    \titlespacing*{\chapter}{0pt}{16pt}{4pt}
+
+    \titlecontents{chapter}
+    [0pt]
+    {\vspace{2pt}\fontsize{13pt}{16pt}\selectfont\bfseries}
+    {Phụ lục \thecontentslabel.\enspace}
+    {}
+    {\titlerule*[0.5pc]{.}\contentspage}
+    [\vspace{2pt}]
+}
+
+%%!
+% @brief Ensures that all inline math expressions are displayed in display style.
+\everymath{\displaystyle}

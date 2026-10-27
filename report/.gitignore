@@ -1,0 +1,86 @@
+# ==========================================
+# LaTeX Build Artifacts & Intermediate Files
+# ==========================================
+
+# Core auxiliary files
+*.aux
+*.lof
+*.log
+*.lot
+*.lol
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# Compiled / Built documents
+main.pdf
+*.dvi
+*.xdv
+*.ps
+
+# If you include vector PDF graphics in assets/, uncomment the line below:
+# !assets/**/*.pdf
+
+# Bibliography auxiliary files (BibTeX / biblatex / biber)
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+# Build tools & SyncTeX
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfpc
+
+# Indexes, glossaries, acronyms
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.idx
+*.ilg
+*.ind
+*.ist
+*.nlg
+*.nlo
+*.nls
+*.xdy
+
+# Other package-specific auxiliary files
+*.loa
+*.lod
+*.nav
+*.pre
+*.snm
+*.vrb
+*.tdo
+*.sta
+*.dpth
+*.md5
+*.auxlock
+*.pytxcode
+_minted*
+*-converted-to.pdf
+
+# ==========================================
+# OS & Editor Files
+# ==========================================
+.DS_Store
+Thumbs.db
+*.bak
+*.swp
+*~
+
