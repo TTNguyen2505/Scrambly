@@ -18,7 +18,6 @@
 .*.lb
 
 # Compiled / Built documents
-main.pdf
 *.dvi
 *.xdv
 *.ps

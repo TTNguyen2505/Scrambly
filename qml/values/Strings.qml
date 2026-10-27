@@ -44,4 +44,3 @@ QtObject {
     readonly property string victoryMessage: qsTr("You solved all words for this level!")
     readonly property string invalidWordMessage: qsTr("Not in the word list. Keep guessing!")
 }
-
