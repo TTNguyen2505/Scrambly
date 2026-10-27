@@ -1,0 +1,57 @@
+%%!
+% @file 00_subcover.tex
+% @brief Sub-cover (inside title page) template with formal double-border frame.
+
+\begin{titlepage}
+    \begin{tikzpicture}[remember picture, overlay]
+        % Khung vien ngoai (1.5pt)
+        \draw[line width=1.5pt, color=black] 
+            ([xshift=20mm, yshift=-20mm]current page.north west) 
+            rectangle 
+            ([xshift=-20mm, yshift=20mm]current page.south east);
+        % Khung vien trong (0.5pt) cach khung ngoai 1.5mm
+        \draw[line width=0.5pt, color=black] 
+            ([xshift=21.5mm, yshift=-21.5mm]current page.north west) 
+            rectangle 
+            ([xshift=-21.5mm, yshift=21.5mm]current page.south east);
+    \end{tikzpicture}
+
+    \vspace*{-4mm}
+
+    \begin{center}
+        {\fontsize{14pt}{18pt}\selectfont\bfseries \MakeUppercase{\theuniversity}\par}
+        \vspace{4pt}
+        {\fontsize{14pt}{18pt}\selectfont\bfseries \MakeUppercase{\thefaculty}\par}
+        \vspace{24pt}
+        \IfFileExists{\theinstitutionlogo}{%
+            \includegraphics[width=3.6cm, height=3.6cm, keepaspectratio]{\theinstitutionlogo}%
+        }{%
+            \begin{tikzpicture}
+                \draw[thick, gray!70] (0,0) rectangle (3.6cm, 3.6cm);
+                \node at (1.8cm, 1.8cm) [gray!80, align=center, font=\fontsize{11pt}{13pt}\selectfont] {LOGO\\4cm $\times$ 4cm};
+            \end{tikzpicture}
+        }
+        \par
+        \vspace{14pt}
+
+        {\fontsize{14pt}{18pt}\selectfont\bfseries \MakeUppercase{\thesubject}\par}
+        \vspace{16pt}
+
+        {\fontsize{14pt}{18pt}\selectfont\bfseries \MakeUppercase{\thereporttitle}\par}
+        \ifx\thesubtitle\empty\relax\else
+            \vspace{6pt}
+            {\fontsize{13pt}{16pt}\selectfont\bfseries \thesubtitle\par}
+        \fi
+    \end{center}
+
+    \vspace*{\fill}
+
+    \noindent\renderauthorblock
+
+    \vspace*{\fill}
+
+    \begin{center}
+        {\fontsize{14pt}{18pt}\selectfont \thesubmissiondate\par}
+    \end{center}
+    \vspace*{24pt}
+\end{titlepage}

@@ -1,0 +1,25 @@
+%%!
+% @file 05_lists.tex
+% @brief Front matter index pages: Table of Contents, Figures, Tables, Listings, and Abbreviations.
+
+\renewcommand{\contentsname}{MỤC LỤC}
+\tableofcontents
+\newpage
+
+\renewcommand{\listfigurename}{DANH MỤC HÌNH VẼ}
+\listoffigures
+\addcontentsline{toc}{chapter}{Danh mục hình vẽ}
+\newpage
+
+\renewcommand{\listtablename}{DANH MỤC BẢNG BIỂU}
+\listoftables
+\addcontentsline{toc}{chapter}{Danh mục bảng biểu}
+\newpage
+
+\renewcommand{\lstlistlistingname}{DANH MỤC ĐOẠN MÃ}
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Danh mục đoạn mã}
+\newpage
+
+\input{config/abbreviations}
+\newpage

@@ -1,0 +1,54 @@
+%%!
+% @file 02_literature_review.tex
+% @brief Template for Chapter 2 demonstrating inline and display mathematical formulas.
+
+\chapter{Tiêu đề chương 2}
+\label{chap:chapter_2}
+
+Nội dung mở đầu của chương 2 trình bày tổng quan các nghiên cứu liên quan, cơ sở lý thuyết nền tảng và các mô hình toán học hoặc kỹ thuật ứng dụng trong phạm vi đề tài nghiên cứu.
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\section{Tiêu đề mục 2.1}
+\label{sec:section_2_1}
+
+Nội dung chi tiết của mục 2.1 tổng hợp các lý thuyết chính, phương pháp luận và các mô hình toán học nền tảng. Dưới đây là các định dạng công thức toán học mẫu theo chuẩn học thuật.
+
+\subsection{Tiêu đề mục 2.1.1}
+\label{subsec:subsection_2_1_1}
+
+Tiểu mục này minh họa công thức toán học trong dòng văn bản (\textit{inline math}) và công thức toán học hiển thị riêng biệt (\textit{display math}).
+
+Trong dòng văn bản, ta có thể biểu diễn các đại lượng như biến số $x \in \mathbb{R}$, vector đặc trưng $\mathbf{x} = [x_1, x_2, \dots, x_n]^T \in \mathbb{R}^n$, hay hàm mục tiêu $f(x) = \frac{1}{1 + e^{-x}}$. Đánh giá độ phức tạp tính toán của thuật toán cũng được thể hiện rõ ràng qua ký hiệu Big-$\mathcal{O}$ như $\mathcal{O}(n \log n)$ với điều kiện ràng buộc sai số $\epsilon \le 10^{-4}$.
+
+Đối với các công thức trọng tâm, ta sử dụng môi trường công thức hiển thị riêng dòng (\textit{display math}) có đánh số tự động để phục vụ việc tham chiếu chéo. Công thức \eqref{eq:sample_sigmoid} biểu diễn hàm kích hoạt chuẩn:
+
+\begin{equation}
+    \label{eq:sample_sigmoid}
+    \sigma(z) = \frac{1}{1 + e^{-z}} = \frac{e^z}{e^z + 1}, \quad \forall z \in \mathbb{R}
+\end{equation}
+
+Khi cần trình bày hệ công thức hoặc bài toán tối ưu nhiều bước có căn chỉnh dấu bằng, môi trường \texttt{align} được sử dụng như minh họa trong hệ thức \eqref{eq:sample_loss} và \eqref{eq:sample_gradient}:
+
+\begin{align}
+    \label{eq:sample_loss}
+    \mathcal{L}(\mathbf{w}) &= -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \ln(\hat{y}_i) + (1 - y_i)\ln(1 - \hat{y}_i) \right] + \frac{\lambda}{2} \|\mathbf{w}\|_2^2, \\
+    \label{eq:sample_gradient}
+    \nabla_{\mathbf{w}} \mathcal{L}(\mathbf{w}) &= \frac{1}{N} \sum_{i=1}^{N} (\hat{y}_i - y_i) \mathbf{x}_i + \lambda \mathbf{w}.
+\end{align}
+
+Ngoài ra, trường hợp cần hiển thị công thức ma trận không đánh số, ta có thể sử dụng môi trường dấu ngoặc vuông \texttt{\textbackslash[ \dots \textbackslash]} kết hợp môi trường \texttt{bmatrix}:
+
+\[
+    \mathbf{A} = \begin{bmatrix}
+        a_{11} & a_{12} & \dots  & a_{1n} \\
+        a_{21} & a_{22} & \dots  & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{m1} & a_{m2} & \dots  & a_{mn}
+    \end{bmatrix} \in \mathbb{R}^{m \times n}
+\]
+
+\section{Tiêu đề mục 2.2}
+\label{sec:section_2_2}
+
+Nội dung chi tiết của mục 2.2 so sánh, đánh giá đối chiếu giữa các phương pháp tiếp cận khác nhau nhằm định hình giải pháp tối ưu cho đề tài nghiên cứu.

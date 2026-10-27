@@ -1,0 +1,56 @@
+%%!
+% @file main.tex
+% @brief Master document assembling front matter, main chapters, and back matter.
+%!TEX program = xelatex
+\documentclass[12pt, a4paper, oneside]{report}
+
+\usepackage{config/packages}
+\usepackage{config/format}
+\input{config/metadata}
+
+\begin{document}
+
+% 1. Main cover page
+\input{frontmatter/00_cover}
+
+% 2. Sub cover page
+\input{frontmatter/00_subcover}
+
+% 3. Lecturer review form (without page numbering)
+\input{frontmatter/01_lecturer_review}
+
+\newpage
+\pagenumbering{roman}
+
+% 4. Affidavit of originality and authenticity
+\input{frontmatter/03_affirmation}
+
+% 5. Acknowledgments
+\input{frontmatter/04_acknowledgments}
+
+% 6. Table of task assignment
+\input{frontmatter/02_task_assignment}
+
+% 7. Table of contents, list of figures, and list of tables
+\input{frontmatter/05_lists}
+
+\newpage
+\pagenumbering{arabic}
+\input{chapters/01_introduction}
+\input{chapters/02_literature_review}
+\input{chapters/03_system_architecture}
+\input{chapters/04_implementation}
+\input{chapters/05_conclusion}
+
+\newpage
+\renewcommand{\bibname}{TÀI LIỆU THAM KHẢO}
+\bibliographystyle{IEEEtran}
+\addcontentsline{toc}{chapter}{Tài liệu tham khảo}
+\bibliography{backmatter/references}
+
+\appendix
+\appendixmaintitle{PHỤ LỤC}
+\input{backmatter/appendices/appendix_a_source_code}
+\input{backmatter/appendices/appendix_b_survey_data}
+
+\end{document}

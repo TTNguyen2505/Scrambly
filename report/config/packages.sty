@@ -1,0 +1,61 @@
+%%!
+% @file packages.sty
+% @brief Core package dependencies and global font configuration.
+\ProvidesPackage{config/packages}
+
+\usepackage{iftex}
+\usepackage[fontsize=13pt]{scrextend}
+
+\RequirePackage{newtxtext}
+\RequirePackage{newtxmath}
+\RequirePackage{inconsolata}
+
+%%!
+% @note Binds OpenType Inconsolata font in XeTeX when installed on the host system.
+\ifXeTeX
+  \IfFontExistsTF{Inconsolatazi4-Regular.otf}{%
+    \setmonofont{Inconsolatazi4}[
+      Extension   = .otf,
+      UprightFont = *-Regular,
+      BoldFont    = *-Bold,
+    ]%
+  }{%
+    \IfFontExistsTF{Inconsolata}{%
+      \setmonofont{Inconsolata}%
+    }{%
+    }%
+  }%
+\fi
+
+\usepackage[
+    a4paper,
+    left=30mm,
+    right=20mm,
+    top=20mm,
+    bottom=20mm
+]{geometry}
+
+\usepackage{setspace}
+\setstretch{1.5}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage[printonlyused]{acronym}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black,
+    bookmarksnumbered=true
+}

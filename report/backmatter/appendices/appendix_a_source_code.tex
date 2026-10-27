@@ -1,0 +1,24 @@
+%%!
+% @file appendix_a_source_code.tex
+% @brief Template for Appendix A (Source Code and Configuration).
+
+\chapter{Tiêu đề phụ lục A}
+\label{app:appendix_a}
+
+Phụ lục này cung cấp toàn bộ nội dung tệp tin cấu hình và mã nguồn mẫu phục vụ minh họa trong tài liệu báo cáo.
+
+\section{Tiêu đề mục A.1}
+\label{sec:section_a_1}
+
+Nội dung chi tiết của mục A.1 giới thiệu cấu trúc kịch bản triển khai mẫu dưới đây. Đoạn mã \ref{lst:appendix_sample_code} minh họa cấu hình dịch vụ.
+
+\begin{lstlisting}[language=bash, caption={Tiêu đề đoạn mã A.1}, label={lst:appendix_sample_code}]
+version: '3.8'
+services:
+  sample-service:
+    image: alpine:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - APP_ENV=production
+\end{lstlisting}

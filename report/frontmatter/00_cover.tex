@@ -1,0 +1,50 @@
+%%!
+% @file 00_cover.tex
+% @brief Title page template with institutional border, logo, and balanced metadata.
+\begin{titlepage}
+    \begin{tikzpicture}[remember picture, overlay]
+        \draw[line width=3pt, color=black] 
+            ([xshift=20mm, yshift=-20mm]current page.north west) 
+            rectangle 
+            ([xshift=-20mm, yshift=20mm]current page.south east);
+    \end{tikzpicture}
+
+    \vspace*{-4mm}
+
+    \begin{center}
+        {\fontsize{14pt}{18pt}\selectfont\bfseries \MakeUppercase{\theuniversity}\par}
+        \vspace{4pt}
+        {\fontsize{14pt}{18pt}\selectfont\bfseries \MakeUppercase{\thefaculty}\par}
+        \vspace{24pt}
+        \IfFileExists{\theinstitutionlogo}{%
+            \includegraphics[width=3.6cm, height=3.6cm, keepaspectratio]{\theinstitutionlogo}%
+        }{%
+            \begin{tikzpicture}
+                \draw[thick, gray!70] (0,0) rectangle (3.6cm, 3.6cm);
+                \node at (1.8cm, 1.8cm) [gray!80, align=center, font=\fontsize{11pt}{13pt}\selectfont] {LOGO\\4cm $\times$ 4cm};
+            \end{tikzpicture}
+        }
+        \par
+        \vspace{14pt}
+
+        {\fontsize{14pt}{18pt}\selectfont\bfseries \MakeUppercase{\thesubject}\par}
+        \vspace{16pt}
+
+        {\fontsize{14pt}{18pt}\selectfont\bfseries \MakeUppercase{\thereporttitle}\par}
+        \ifx\thesubtitle\empty\relax\else
+            \vspace{6pt}
+            {\fontsize{13pt}{16pt}\selectfont\bfseries \thesubtitle\par}
+        \fi
+    \end{center}
+
+    \vspace*{\fill}
+
+    \noindent\renderauthorblock
+
+    \vspace*{\fill}
+
+    \begin{center}
+        {\fontsize{14pt}{18pt}\selectfont \thesubmissiondate\par}
+    \end{center}
+    \vspace*{24pt}
+\end{titlepage}
